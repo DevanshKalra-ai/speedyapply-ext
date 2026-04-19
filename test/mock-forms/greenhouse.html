@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Software Engineer - Test Company | Greenhouse</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; }
+    label { display: block; margin-top: 16px; font-weight: 600; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+    textarea { height: 120px; }
+    h1 { color: #1a1a1a; }
+    .company-name { color: #666; }
+    button { margin-top: 24px; padding: 10px 24px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1 class="app-title">Software Engineer</h1>
+  <p class="company-name">Test Company Inc.</p>
+  <p>Apply for this position by completing the form below.</p>
+
+  <form id="application-form" action="#" method="POST">
+    <label for="first_name">First Name *</label>
+    <input type="text" id="first_name" name="first_name" placeholder="First name" required />
+
+    <label for="last_name">Last Name *</label>
+    <input type="text" id="last_name" name="last_name" placeholder="Last name" required />
+
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" placeholder="Email" required />
+
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone" placeholder="Phone number" />
+
+    <label for="resume">Resume/CV *</label>
+    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+
+    <label for="cover_letter">Cover Letter</label>
+    <textarea id="cover_letter" name="cover_letter" placeholder="Write your cover letter..."></textarea>
+
+    <label for="linkedin_profile">LinkedIn Profile URL</label>
+    <input type="url" id="linkedin_profile" name="linkedin_profile" placeholder="https://linkedin.com/in/..." />
+
+    <label for="website">Website</label>
+    <input type="url" id="website" name="website" placeholder="https://..." />
+
+    <label for="why_work">Why do you want to work at Test Company?</label>
+    <textarea id="why_work" name="why_work" placeholder="Tell us why you're interested..." maxlength="2000"></textarea>
+
+    <label for="challenge">Describe a challenge you overcame at work.</label>
+    <textarea id="challenge" name="challenge" placeholder="Share a professional challenge..." maxlength="2000"></textarea>
+
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <script>
+    // Simulate Greenhouse domain for testing detector
+    // Open browser console and check that SpeedyApply detects this as 'greenhouse'
+    document.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      document.title = 'Application Submitted - Test Company';
+      document.body.innerHTML = '<h1>Thank you for applying!</h1><p>Your application has been submitted.</p>';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "SpeedyApply",
+  "version": "1.0.0",
+  "description": "Autofill job applications and track your job search",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "https://*.greenhouse.io/*",
+    "https://*.ashbyhq.com/*",
+    "https://*.lever.co/*",
+    "https://jobs.lever.co/*",
+    "https://apply.workable.com/*",
+    "https://*.workable.com/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://*.ashbyhq.com/*"],
+      "js": ["content/ashby-intercept-early.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "shared/constants.js",
+        "shared/utils.js",
+        "shared/storage.js",
+        "content/detector.js",
+        "content/field-mapper.js",
+        "content/ai-handler.js",
+        "content/portals/generic.js",
+        "content/portals/greenhouse.js",
+        "content/portals/lever.js",
+        "content/portals/ashby.js",
+        "content/portals/workable.js",
+        "content/sidebar.js",
+        "content/content-main.js"
+      ],
+      "css": ["assets/sidebar.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  }
+}

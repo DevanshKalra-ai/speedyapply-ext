@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpeedyApply</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <img src="../assets/icons/icon48.png" alt="SpeedyApply" class="logo-icon" />
+        <span class="logo-text">SpeedyApply</span>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="profile">Profile</button>
+      <button class="tab-btn" data-tab="tracker">Tracker</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </nav>
+
+    <!-- Tab Content -->
+    <main id="view-container">
+      <!-- Rendered dynamically by popup.js -->
+    </main>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/utils.js"></script>
+  <script src="../shared/storage.js"></script>
+  <script src="components/profile-form.js"></script>
+  <script src="components/tracker-table.js"></script>
+  <script src="components/settings-panel.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

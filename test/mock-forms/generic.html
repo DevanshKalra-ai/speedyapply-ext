@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apply - Generic Company Careers</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; }
+    label { display: block; margin-top: 14px; font-weight: 600; font-size: 13px; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+    textarea { height: 100px; }
+    button { margin-top: 20px; padding: 10px 24px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Join Our Team</h1>
+  <p>Apply for: <strong>Product Manager</strong></p>
+
+  <form>
+    <!-- Uses autocomplete attributes — highest confidence -->
+    <label>First Name</label>
+    <input type="text" autocomplete="given-name" placeholder="First name" />
+
+    <label>Last Name</label>
+    <input type="text" autocomplete="family-name" placeholder="Last name" />
+
+    <label>Email Address</label>
+    <input type="email" autocomplete="email" placeholder="your@email.com" />
+
+    <label>Phone Number</label>
+    <input type="tel" autocomplete="tel" placeholder="+1 555 555 5555" />
+
+    <!-- Uses aria-labels -->
+    <label id="city-label">City</label>
+    <input type="text" aria-labelledby="city-label" placeholder="City" />
+
+    <label>State / Province</label>
+    <input type="text" aria-label="State" placeholder="CA" />
+
+    <!-- Uses name attributes -->
+    <label>LinkedIn</label>
+    <input type="url" name="linkedin" placeholder="linkedin.com/in/..." />
+
+    <label>GitHub</label>
+    <input type="url" name="github" placeholder="github.com/..." />
+
+    <!-- AI candidate questions -->
+    <label>Why are you interested in this role?</label>
+    <textarea name="why_interested" maxlength="3000" placeholder="Tell us more..."></textarea>
+
+    <label>Additional information</label>
+    <textarea name="additional_info" placeholder="Anything else you'd like us to know?"></textarea>
+
+    <button type="submit">Apply Now</button>
+  </form>
+</body>
+</html>
