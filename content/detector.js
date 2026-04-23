@@ -10,16 +10,26 @@ function detectPortal() {
   if (host.includes('ashbyhq.com')) return 'ashby';
   if (host.includes('lever.co')) return 'lever';
   if (host.includes('workable.com')) return 'workable';
+  if (host.includes('smartrecruiters.com')) return 'smartrecruiters';
+  if (host.includes('teamtailor.com')) return 'teamtailor';
+  if (host.includes('jobvite.com')) return 'jobvite';
 
   // Embedded Greenhouse — careers.<company>.com/?gh_jid=...&gh_src=...
   // Many companies host Greenhouse-backed job boards on their own domain.
   if (/[?&]gh_jid=/.test(search) || /[?&]gh_src=/.test(search)) return 'greenhouse';
 
-  // DOM-based fallback signals — catches embedded boards without URL hints
+  // DOM-based fallback signals — catches embedded boards on custom career domains
   if (document.querySelector('form[action*="greenhouse"], form[action*="boards.greenhouse"], iframe[src*="greenhouse.io"], script[src*="boards.greenhouse.io"]')) return 'greenhouse';
   if (document.querySelector('[data-field-id]')) return 'ashby';
   if (document.querySelector('form[action*="lever.co"], form[action*="jobs.lever.co"]')) return 'lever';
   if (document.querySelector('[data-ui="firstname"], [data-ui="first-name"]')) return 'workable';
+
+  // SmartRecruiters embedded iframe (some companies iframe jobs.smartrecruiters.com)
+  if (document.querySelector('iframe[src*="smartrecruiters.com"], script[src*="smartrecruiters.com"]')) return 'smartrecruiters';
+  // Teamtailor embedded / self-hosted: they set a meta generator tag or global teamtailor class
+  if (document.querySelector('meta[name="generator"][content*="Teamtailor" i], [data-teamtailor], script[src*="teamtailor.com"]')) return 'teamtailor';
+  // Jobvite embedded: jv-* class prefix
+  if (document.querySelector('[class^="jv-"], [class*=" jv-"], script[src*="jobvite.com"]')) return 'jobvite';
 
   return 'generic';
 }
@@ -50,10 +60,29 @@ function isApplicationPage(portal) {
       return document.querySelector('form[data-ui], form[class*="application"]') !== null ||
              document.querySelector('input[name="firstname"], input[name="candidate[firstname]"]') !== null;
 
+    case 'smartrecruiters':
+      // SmartRecruiters posting URLs look like jobs.smartrecruiters.com/<Company>/<numeric-id>-<slug>
+      // The apply form loads on the same page or via /application route
+      return /jobs\.smartrecruiters\.com\/[^/]+\/\d+/.test(url) ||
+             url.includes('/application') ||
+             document.querySelector('input[name="firstName"], input[name="first_name"], input[id="firstName"]') !== null;
+
+    case 'teamtailor':
+      // Teamtailor URLs: career.teamtailor.com/jobs/<id>-<slug> or <company>.teamtailor.com/jobs/...
+      return /\/jobs\/\d+/.test(url) ||
+             url.includes('/applications') ||
+             document.querySelector('input[name^="job_application"], form[action*="applications"]') !== null;
+
+    case 'jobvite':
+      // Jobvite URLs: jobs.jobvite.com/<company>/job/<id>
+      return /\/job\//.test(url) ||
+             url.includes('/apply') ||
+             document.querySelector('[class^="jv-"], form[action*="jobvite"]') !== null;
+
     case 'generic':
       // A form with at least one visible input — but require a real apply signal
       // to avoid injecting the sidebar on every random site the user visits.
-      if (!/apply|career|job|greenhouse|lever|ashby|workable/i.test(url)) return false;
+      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|teamtailor|jobvite/i.test(url)) return false;
       return document.querySelector('form') !== null &&
              document.querySelector('input[type="text"], input[type="email"], input[type="tel"]') !== null;
   }
@@ -85,6 +114,22 @@ function detectJobContext() {
   // Ashby
   const ashTitle = document.querySelector('h1[data-testid="job-title"], h1');
   if (ashTitle && !context.jobTitle) context.jobTitle = ashTitle.textContent.trim();
+
+  // SmartRecruiters — job title is in the posting header, company is in the URL path
+  const srTitle = document.querySelector('.job-title, h1[class*="job"], h1[class*="Title"], [class*="JobTitle"]');
+  if (srTitle && !context.jobTitle) context.jobTitle = srTitle.textContent.trim();
+  if (window.location.hostname.includes('smartrecruiters.com') && !context.company) {
+    const m = window.location.pathname.match(/^\/([^/]+)/);
+    if (m) context.company = decodeURIComponent(m[1]).replace(/-/g, ' ');
+  }
+
+  // Teamtailor — h1 holds the title
+  const ttTitle = document.querySelector('[class*="JobTitle"], h1[class*="title"], h1');
+  if (ttTitle && !context.jobTitle) context.jobTitle = ttTitle.textContent.trim();
+
+  // Jobvite — .jv-job-detail-title
+  const jvTitle = document.querySelector('.jv-job-detail-title, .jv-header-title, h2.jv-job-detail-title');
+  if (jvTitle && !context.jobTitle) context.jobTitle = jvTitle.textContent.trim();
 
   // Fallbacks from page title
   if (!context.jobTitle) {

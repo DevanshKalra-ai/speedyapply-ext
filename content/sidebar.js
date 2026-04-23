@@ -127,11 +127,14 @@ async function triggerFill(portal, jobContext) {
 
     let results;
     switch (portal) {
-      case 'greenhouse': results = await fillGreenhouse(profile); break;
-      case 'ashby':      results = await fillAshby(profile); break;
-      case 'lever':      results = await fillLever(profile); break;
-      case 'workable':   results = await fillWorkable(profile); break;
-      default:           results = await fillGeneric(profile); break;
+      case 'greenhouse':      results = await fillGreenhouse(profile); break;
+      case 'ashby':           results = await fillAshby(profile); break;
+      case 'lever':           results = await fillLever(profile); break;
+      case 'workable':        results = await fillWorkable(profile); break;
+      case 'smartrecruiters': results = await fillSmartRecruiters(profile); break;
+      case 'teamtailor':      results = await fillTeamtailor(profile); break;
+      case 'jobvite':         results = await fillJobvite(profile); break;
+      default:                results = await fillGeneric(profile); break;
     }
 
     if (results.error) {

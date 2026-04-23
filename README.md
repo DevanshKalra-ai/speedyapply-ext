@@ -2,15 +2,21 @@
 
 A Manifest V3 Chrome extension that autofills job applications across multiple portals, uploads your resume, and uses Gemini AI to generate answers for open-ended questions.
 
-## Supported Portals (v1)
+## Supported Portals
 
-| Portal | Detection | Notes |
-|--------|-----------|-------|
-| **Greenhouse** | `boards.greenhouse.io`, `*.greenhouse.io`, `?gh_jid=` URL param | Supports embedded career sites (e.g. `careers.company.com/?gh_jid=...`) |
-| **Ashby** | `*.ashbyhq.com` | Full React form support via MAIN-world bridge |
-| **Lever** | `jobs.lever.co` | |
-| **Workable** | `apply.workable.com`, `*.workable.com` | Includes experience/education sections, AI summary |
-| **Generic** | Any URL with `apply`, `career`, or `job` keywords | Label-based field matching |
+| Portal | Detection | Example companies |
+|--------|-----------|-------------------|
+| **Greenhouse** | `boards.greenhouse.io`, `?gh_jid=` URL param, DOM signals | Anthropic, Figma, Duolingo, HubSpot, Loop |
+| **Ashby** | `*.ashbyhq.com` | Notion, Linear, Ramp, Vercel, Plaid, Supabase, PostHog, Deel, Reddit, Snowflake |
+| **Lever** | `jobs.lever.co` | Spotify, Shopify, Netflix (legacy), KPMG, Atlassian |
+| **Workable** | `apply.workable.com`, `*.workable.com` | 30,000+ companies incl. Workable careers |
+| **SmartRecruiters** | `jobs.smartrecruiters.com`, `*.smartrecruiters.com` | Visa, LinkedIn, Bosch, McDonald's, Skechers |
+| **Teamtailor** | `*.teamtailor.com`, meta generator tag | 12,000+ companies — Oneflow, Tailify, Rocco Forte |
+| **Jobvite** | `jobs.jobvite.com`, `.jv-*` classes | Various mid-market employers |
+| **Generic** | Any URL with `apply`, `career`, or `job` keywords | Fallback label-based field matching |
+
+### Greenhouse embedded boards
+SpeedyApply detects Greenhouse-backed career pages hosted on the company's own domain. If the URL contains `?gh_jid=` or `?gh_src=` (e.g. `careers.nebius.com/?gh_jid=...`), it activates Greenhouse autofill. Also catches embedded `iframe` and `script` signals.
 
 ## Features
 
@@ -69,6 +75,9 @@ speedyapply-ext/
 │       ├── ashby.js
 │       ├── lever.js
 │       ├── workable.js
+│       ├── smartrecruiters.js
+│       ├── teamtailor.js
+│       ├── jobvite.js
 │       └── generic.js
 ├── popup/
 │   ├── popup.html / popup.css / popup.js

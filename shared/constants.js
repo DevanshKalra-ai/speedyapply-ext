@@ -2,11 +2,14 @@
 // Portal hostnames, field selector dictionaries, AI keywords
 
 const PORTALS = {
-  greenhouse: { hosts: ['.greenhouse.io', 'boards.greenhouse.io'], name: 'Greenhouse' },
-  ashby:      { hosts: ['.ashbyhq.com', 'jobs.ashbyhq.com'], name: 'Ashby' },
-  lever:      { hosts: ['.lever.co', 'jobs.lever.co'], name: 'Lever' },
-  workable:   { hosts: ['apply.workable.com', '.workable.com'], name: 'Workable' },
-  generic:    { hosts: [], name: 'Job Site' },
+  greenhouse:      { hosts: ['.greenhouse.io', 'boards.greenhouse.io'], name: 'Greenhouse' },
+  ashby:           { hosts: ['.ashbyhq.com', 'jobs.ashbyhq.com'], name: 'Ashby' },
+  lever:           { hosts: ['.lever.co', 'jobs.lever.co'], name: 'Lever' },
+  workable:        { hosts: ['apply.workable.com', '.workable.com'], name: 'Workable' },
+  smartrecruiters: { hosts: ['jobs.smartrecruiters.com', 'careers.smartrecruiters.com', '.smartrecruiters.com'], name: 'SmartRecruiters' },
+  teamtailor:      { hosts: ['.teamtailor.com', 'career.teamtailor.com'], name: 'Teamtailor' },
+  jobvite:         { hosts: ['jobs.jobvite.com', '.jobvite.com'], name: 'Jobvite' },
+  generic:         { hosts: [], name: 'Job Site' },
 };
 
 // Confidence-scored field selector dictionary.
@@ -228,9 +231,12 @@ const AI_QUESTION_KEYWORDS = [
 
 // Success/confirmation page URL signals per portal
 const SUCCESS_SIGNALS = {
-  greenhouse: { urlPatterns: ['/confirmation', 'application_submitted'], titleKeywords: ['application submitted', 'thank you'] },
-  ashby:      { urlPatterns: ['/confirmation', '/submitted'], titleKeywords: ['submitted', 'thank you', 'received'] },
-  lever:      { urlPatterns: ['/thanks', '/confirmation'], titleKeywords: ['application submitted', 'thank you'] },
-  workable:   { urlPatterns: ['/confirmation', '/applied', '/success'], titleKeywords: ['application submitted', 'thank you', 'successfully applied'] },
-  generic:    { urlPatterns: ['/thank-you', '/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
+  greenhouse:      { urlPatterns: ['/confirmation', 'application_submitted'], titleKeywords: ['application submitted', 'thank you'] },
+  ashby:           { urlPatterns: ['/confirmation', '/submitted'], titleKeywords: ['submitted', 'thank you', 'received'] },
+  lever:           { urlPatterns: ['/thanks', '/confirmation'], titleKeywords: ['application submitted', 'thank you'] },
+  workable:        { urlPatterns: ['/confirmation', '/applied', '/success'], titleKeywords: ['application submitted', 'thank you', 'successfully applied'] },
+  smartrecruiters: { urlPatterns: ['/thanks', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received'] },
+  teamtailor:      { urlPatterns: ['/thanks', '/thank-you', '/confirmation'], titleKeywords: ['application submitted', 'thank you', 'received your application'] },
+  jobvite:         { urlPatterns: ['/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
+  generic:         { urlPatterns: ['/thank-you', '/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
 };
