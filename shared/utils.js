@@ -17,6 +17,24 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Deep query that descends into open shadow roots. Needed for portals that
+// render their form inside Web Components (e.g. SmartRecruiters OneClick).
+function deepQuerySelectorAll(selector, root = document) {
+  const out = [];
+  function walk(node) {
+    try { out.push(...node.querySelectorAll(selector)); } catch {}
+    node.querySelectorAll('*').forEach(el => {
+      if (el.shadowRoot) walk(el.shadowRoot);
+    });
+  }
+  walk(root);
+  return out;
+}
+
+function deepQuerySelector(selector, root = document) {
+  return deepQuerySelectorAll(selector, root)[0] || null;
+}
+
 function randomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

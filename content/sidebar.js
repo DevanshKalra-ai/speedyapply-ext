@@ -226,7 +226,10 @@ function isDropdownEmpty(sel) {
 function uploadResumeToFileInputs(resume) {
   if (!resume?.base64 || !resume?.name) return;
 
-  const inputs = document.querySelectorAll('input[type="file"]');
+  // Deep query covers SmartRecruiters OneClick (shadow DOM) + standard inputs.
+  const inputs = typeof deepQuerySelectorAll === 'function'
+    ? deepQuerySelectorAll('input[type="file"]')
+    : [...document.querySelectorAll('input[type="file"]')];
   if (!inputs.length) return;
 
   // Convert base64 → Blob → File
