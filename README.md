@@ -10,9 +10,9 @@ A Manifest V3 Chrome extension that autofills job applications across multiple p
 | **Ashby** | `*.ashbyhq.com` | Notion, Linear, Ramp, Vercel, Plaid, Supabase, PostHog, Deel, Reddit, Snowflake |
 | **Lever** | `jobs.lever.co` | Spotify, Shopify, Netflix (legacy), KPMG, Atlassian |
 | **Workable** | `apply.workable.com`, `*.workable.com` | 30,000+ companies incl. Workable careers |
-| **SmartRecruiters** | `jobs.smartrecruiters.com`, `*.smartrecruiters.com` | Visa, LinkedIn, Bosch, McDonald's, Skechers |
-| **Teamtailor** | `*.teamtailor.com`, meta generator tag | 12,000+ companies — Oneflow, Tailify, Rocco Forte |
-| **Jobvite** | `jobs.jobvite.com`, `.jv-*` classes | Various mid-market employers |
+| **SmartRecruiters** | `jobs.smartrecruiters.com`, `*.smartrecruiters.com` (incl. OneClick shadow DOM) | Visa, LinkedIn, Bosch, McDonald's, Skechers, Dungarvin |
+| **Breezy HR** | `*.breezy.hr` | Thousands of startups and mid-size employers |
+| **Jobvite** | `jobs.jobvite.com`, `.jv-*` classes | Starwood Capital, Internet Brands, INNIO Group |
 | **Generic** | Any URL with `apply`, `career`, or `job` keywords | Fallback label-based field matching |
 
 ### Greenhouse embedded boards
@@ -76,7 +76,7 @@ speedyapply-ext/
 │       ├── lever.js
 │       ├── workable.js
 │       ├── smartrecruiters.js
-│       ├── teamtailor.js
+│       ├── breezy.js
 │       ├── jobvite.js
 │       └── generic.js
 ├── popup/

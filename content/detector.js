@@ -11,7 +11,7 @@ function detectPortal() {
   if (host.includes('lever.co')) return 'lever';
   if (host.includes('workable.com')) return 'workable';
   if (host.includes('smartrecruiters.com')) return 'smartrecruiters';
-  if (host.includes('teamtailor.com')) return 'teamtailor';
+  if (host.endsWith('.breezy.hr') || host === 'breezy.hr') return 'breezy';
   if (host.includes('jobvite.com')) return 'jobvite';
 
   // Embedded Greenhouse — careers.<company>.com/?gh_jid=...&gh_src=...
@@ -26,8 +26,8 @@ function detectPortal() {
 
   // SmartRecruiters embedded iframe (some companies iframe jobs.smartrecruiters.com)
   if (document.querySelector('iframe[src*="smartrecruiters.com"], script[src*="smartrecruiters.com"]')) return 'smartrecruiters';
-  // Teamtailor embedded / self-hosted: they set a meta generator tag or global teamtailor class
-  if (document.querySelector('meta[name="generator"][content*="Teamtailor" i], [data-teamtailor], script[src*="teamtailor.com"]')) return 'teamtailor';
+  // Breezy HR embedded form: iframe or script pointing at breezy.hr
+  if (document.querySelector('iframe[src*="breezy.hr"], script[src*="breezy.hr"]')) return 'breezy';
   // Jobvite embedded: jv-* class prefix
   if (document.querySelector('[class^="jv-"], [class*=" jv-"], script[src*="jobvite.com"]')) return 'jobvite';
 
@@ -69,8 +69,8 @@ function isApplicationPage(portal) {
       // the sidebar sits idle until the user clicks Apply and autofills.
       return true;
 
-    case 'teamtailor':
-      // Hostname already confirmed Teamtailor — accept any path.
+    case 'breezy':
+      // Hostname already confirmed Breezy HR — accept any path.
       return true;
 
     case 'jobvite':
@@ -80,7 +80,7 @@ function isApplicationPage(portal) {
     case 'generic':
       // A form with at least one visible input — but require a real apply signal
       // to avoid injecting the sidebar on every random site the user visits.
-      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|teamtailor|jobvite/i.test(url)) return false;
+      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|breezy|jobvite/i.test(url)) return false;
       return document.querySelector('form') !== null &&
              document.querySelector('input[type="text"], input[type="email"], input[type="tel"]') !== null;
   }
@@ -121,9 +121,9 @@ function detectJobContext() {
     if (m) context.company = decodeURIComponent(m[1]).replace(/-/g, ' ');
   }
 
-  // Teamtailor — h1 holds the title
-  const ttTitle = document.querySelector('[class*="JobTitle"], h1[class*="title"], h1');
-  if (ttTitle && !context.jobTitle) context.jobTitle = ttTitle.textContent.trim();
+  // Breezy HR — posting title is in .position-title or the page h1
+  const brTitle = document.querySelector('.position-title, h1.position-headline, h1');
+  if (brTitle && !context.jobTitle) context.jobTitle = brTitle.textContent.trim();
 
   // Jobvite — .jv-job-detail-title
   const jvTitle = document.querySelector('.jv-job-detail-title, .jv-header-title, h2.jv-job-detail-title');

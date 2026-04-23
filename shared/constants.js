@@ -7,7 +7,7 @@ const PORTALS = {
   lever:           { hosts: ['.lever.co', 'jobs.lever.co'], name: 'Lever' },
   workable:        { hosts: ['apply.workable.com', '.workable.com'], name: 'Workable' },
   smartrecruiters: { hosts: ['jobs.smartrecruiters.com', 'careers.smartrecruiters.com', '.smartrecruiters.com'], name: 'SmartRecruiters' },
-  teamtailor:      { hosts: ['.teamtailor.com', 'career.teamtailor.com'], name: 'Teamtailor' },
+  breezy:          { hosts: ['.breezy.hr', 'app.breezy.hr'], name: 'Breezy HR' },
   jobvite:         { hosts: ['jobs.jobvite.com', '.jobvite.com'], name: 'Jobvite' },
   generic:         { hosts: [], name: 'Job Site' },
 };
@@ -236,7 +236,7 @@ const SUCCESS_SIGNALS = {
   lever:           { urlPatterns: ['/thanks', '/confirmation'], titleKeywords: ['application submitted', 'thank you'] },
   workable:        { urlPatterns: ['/confirmation', '/applied', '/success'], titleKeywords: ['application submitted', 'thank you', 'successfully applied'] },
   smartrecruiters: { urlPatterns: ['/thanks', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received'] },
-  teamtailor:      { urlPatterns: ['/thanks', '/thank-you', '/confirmation'], titleKeywords: ['application submitted', 'thank you', 'received your application'] },
+  breezy:          { urlPatterns: ['/thanks', '/thank-you', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received your application'] },
   jobvite:         { urlPatterns: ['/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
   generic:         { urlPatterns: ['/thank-you', '/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
 };

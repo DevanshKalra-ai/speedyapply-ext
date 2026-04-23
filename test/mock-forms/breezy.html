@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Full Stack Engineer - Mocktech | Breezy HR</title>
+  <!-- Detector signal: script loaded from breezy.hr -->
+  <script src="https://app.breezy.hr/static/placeholder.js" async></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 24px; background: #fafafa; }
+    h1 { color: #111; margin: 0 0 4px; }
+    .company { color: #666; margin-bottom: 24px; }
+    label { display: block; margin-top: 14px; font-weight: 600; font-size: 13px; color: #333; }
+    input, textarea, select { width: 100%; padding: 8px 10px; margin-top: 4px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+    textarea { height: 110px; }
+    .radio-group { margin-top: 8px; }
+    .radio-group label { display: inline; font-weight: normal; margin-right: 16px; }
+    .radio-group input[type="radio"] { width: auto; margin-right: 4px; }
+    button { margin-top: 24px; padding: 10px 28px; background: #2ca05a; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: 600; }
+    .section { margin-top: 24px; padding-top: 18px; border-top: 1px solid #eee; }
+    .section h2 { font-size: 15px; color: #111; margin: 0 0 4px; }
+    fieldset { border: none; padding: 0; margin: 0; }
+    legend { font-weight: 600; font-size: 13px; color: #333; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <h1 class="position-title">Full Stack Engineer</h1>
+  <p class="company">Mocktech · Remote · Full-time</p>
+  <p>Apply for this position with Breezy HR.</p>
+
+  <form id="breezy-apply-form" action="#" method="POST">
+    <div class="section">
+      <h2>Personal Information</h2>
+
+      <label for="first_name">First Name *</label>
+      <input type="text" id="first_name" name="first_name" required />
+
+      <label for="last_name">Last Name *</label>
+      <input type="text" id="last_name" name="last_name" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" />
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" placeholder="City" />
+    </div>
+
+    <div class="section">
+      <h2>Links</h2>
+
+      <label for="linkedin">LinkedIn</label>
+      <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/..." />
+
+      <label for="website">Website</label>
+      <input type="url" id="website" name="website" />
+
+      <label for="github">GitHub</label>
+      <input type="url" id="github" name="github" />
+    </div>
+
+    <div class="section">
+      <h2>Experience</h2>
+
+      <label for="current_company">Current Company</label>
+      <input type="text" id="current_company" name="current_company" />
+
+      <label for="current_title">Current Title</label>
+      <input type="text" id="current_title" name="current_title" />
+
+      <label for="summary">Experience Summary</label>
+      <textarea id="summary" name="summary" placeholder="Briefly describe your experience"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>Resume &amp; Cover Letter</h2>
+
+      <label for="resume">Upload Resume *</label>
+      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+
+      <label for="cover_letter">Cover Letter</label>
+      <textarea id="cover_letter" name="cover_letter"></textarea>
+    </div>
+
+    <div class="section">
+      <h2>Screening Questions</h2>
+
+      <fieldset>
+        <legend>Are you authorized to work in this country? *</legend>
+        <div class="radio-group">
+          <label><input type="radio" name="work_auth" value="Yes" /> Yes</label>
+          <label><input type="radio" name="work_auth" value="No" /> No</label>
+        </div>
+      </fieldset>
+
+      <label for="why_mocktech">Why are you interested in joining Mocktech?</label>
+      <textarea id="why_mocktech" name="why_mocktech"></textarea>
+    </div>
+
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <script>
+    document.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      document.title = 'Thank you - Mocktech';
+      document.body.innerHTML = '<h1>Application submitted!</h1><p>Thanks for applying.</p>';
+    });
+  </script>
+</body>
+</html>
