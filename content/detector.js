@@ -61,23 +61,21 @@ function isApplicationPage(portal) {
              document.querySelector('input[name="firstname"], input[name="candidate[firstname]"]') !== null;
 
     case 'smartrecruiters':
-      // SmartRecruiters posting URLs look like jobs.smartrecruiters.com/<Company>/<numeric-id>-<slug>
-      // The apply form loads on the same page or via /application route
-      return /jobs\.smartrecruiters\.com\/[^/]+\/\d+/.test(url) ||
-             url.includes('/application') ||
-             document.querySelector('input[name="firstName"], input[name="first_name"], input[id="firstName"]') !== null;
+      // SmartRecruiters uses several URL shapes:
+      //   jobs.smartrecruiters.com/<Company>/<numeric-id>-<slug>
+      //   jobs.smartrecruiters.com/oneclick-ui/company/<Company>/publication/<uuid>
+      //   careers.smartrecruiters.com/<Company>/...
+      // Since the hostname already told us this is SmartRecruiters, accept any path —
+      // the sidebar sits idle until the user clicks Apply and autofills.
+      return true;
 
     case 'teamtailor':
-      // Teamtailor URLs: career.teamtailor.com/jobs/<id>-<slug> or <company>.teamtailor.com/jobs/...
-      return /\/jobs\/\d+/.test(url) ||
-             url.includes('/applications') ||
-             document.querySelector('input[name^="job_application"], form[action*="applications"]') !== null;
+      // Hostname already confirmed Teamtailor — accept any path.
+      return true;
 
     case 'jobvite':
-      // Jobvite URLs: jobs.jobvite.com/<company>/job/<id>
-      return /\/job\//.test(url) ||
-             url.includes('/apply') ||
-             document.querySelector('[class^="jv-"], form[action*="jobvite"]') !== null;
+      // Hostname already confirmed Jobvite — accept any path.
+      return true;
 
     case 'generic':
       // A form with at least one visible input — but require a real apply signal
