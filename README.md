@@ -13,6 +13,8 @@ A Manifest V3 Chrome extension that autofills job applications across multiple p
 | **SmartRecruiters** | `jobs.smartrecruiters.com`, `*.smartrecruiters.com` (incl. OneClick shadow DOM) | Visa, LinkedIn, Bosch, McDonald's, Skechers, Dungarvin |
 | **Breezy HR** | `*.breezy.hr` | Thousands of startups and mid-size employers |
 | **Jobvite** | `jobs.jobvite.com`, `.jv-*` classes | Starwood Capital, Internet Brands, INNIO Group |
+| **Personio** | `*.jobs.personio.com/.de` | Zalando, Statista, Premier Inn and 1000s of EU companies |
+| **Recruitee** | `*.recruitee.com` | 3,500+ companies across 70+ countries (Transavia etc.) |
 | **Generic** | Any URL with `apply`, `career`, or `job` keywords | Fallback label-based field matching |
 
 ### Greenhouse embedded boards
@@ -78,6 +80,8 @@ speedyapply-ext/
 │       ├── smartrecruiters.js
 │       ├── breezy.js
 │       ├── jobvite.js
+│       ├── personio.js
+│       ├── recruitee.js
 │       └── generic.js
 ├── popup/
 │   ├── popup.html / popup.css / popup.js

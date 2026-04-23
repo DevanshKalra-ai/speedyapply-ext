@@ -13,6 +13,8 @@ function detectPortal() {
   if (host.includes('smartrecruiters.com')) return 'smartrecruiters';
   if (host.endsWith('.breezy.hr') || host === 'breezy.hr') return 'breezy';
   if (host.includes('jobvite.com')) return 'jobvite';
+  if (host.includes('personio.com') || host.includes('personio.de')) return 'personio';
+  if (host.endsWith('.recruitee.com') || host === 'recruitee.com') return 'recruitee';
 
   // Embedded Greenhouse — careers.<company>.com/?gh_jid=...&gh_src=...
   // Many companies host Greenhouse-backed job boards on their own domain.
@@ -30,6 +32,10 @@ function detectPortal() {
   if (document.querySelector('iframe[src*="breezy.hr"], script[src*="breezy.hr"]')) return 'breezy';
   // Jobvite embedded: jv-* class prefix
   if (document.querySelector('[class^="jv-"], [class*=" jv-"], script[src*="jobvite.com"]')) return 'jobvite';
+  // Personio embedded: iframe or script pointing at personio.com/.de
+  if (document.querySelector('iframe[src*="personio.com"], iframe[src*="personio.de"], script[src*="personio.com"], script[src*="personio.de"]')) return 'personio';
+  // Recruitee embedded: iframe/script or form posting to recruitee
+  if (document.querySelector('iframe[src*="recruitee.com"], script[src*="recruitee.com"], form[action*="recruitee.com"]')) return 'recruitee';
 
   return 'generic';
 }
@@ -70,7 +76,9 @@ function isApplicationPage(portal) {
       return true;
 
     case 'breezy':
-      // Hostname already confirmed Breezy HR — accept any path.
+    case 'personio':
+    case 'recruitee':
+      // Hostname already confirmed the portal — accept any path.
       return true;
 
     case 'jobvite':
@@ -80,7 +88,7 @@ function isApplicationPage(portal) {
     case 'generic':
       // A form with at least one visible input — but require a real apply signal
       // to avoid injecting the sidebar on every random site the user visits.
-      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|breezy|jobvite/i.test(url)) return false;
+      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|breezy|jobvite|personio|recruitee/i.test(url)) return false;
       return document.querySelector('form') !== null &&
              document.querySelector('input[type="text"], input[type="email"], input[type="tel"]') !== null;
   }
@@ -124,6 +132,14 @@ function detectJobContext() {
   // Breezy HR — posting title is in .position-title or the page h1
   const brTitle = document.querySelector('.position-title, h1.position-headline, h1');
   if (brTitle && !context.jobTitle) context.jobTitle = brTitle.textContent.trim();
+
+  // Personio — posting title in .job-title or h1
+  const pTitle = document.querySelector('.job-title, h1[class*="jobTitle"], [data-testid*="title"]');
+  if (pTitle && !context.jobTitle) context.jobTitle = pTitle.textContent.trim();
+
+  // Recruitee — .job-title or headline in h1
+  const rTitle = document.querySelector('.job-title, .position-title, h1');
+  if (rTitle && !context.jobTitle) context.jobTitle = rTitle.textContent.trim();
 
   // Jobvite — .jv-job-detail-title
   const jvTitle = document.querySelector('.jv-job-detail-title, .jv-header-title, h2.jv-job-detail-title');

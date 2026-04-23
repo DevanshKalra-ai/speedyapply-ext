@@ -10,7 +10,7 @@
     // unless the URL looks like a job page or a known portal was detected.
     const isLocalTestPage = window.location.protocol === 'file:';
     if (portal === 'generic' && !isLocalTestPage) {
-      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|breezy|jobvite/i.test(window.location.href)) return;
+      if (!/apply|career|job|greenhouse|lever|ashby|workable|smartrecruiters|breezy|jobvite|personio|recruitee/i.test(window.location.href)) return;
     }
 
     // 2. Check settings

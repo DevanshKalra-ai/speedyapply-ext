@@ -53,6 +53,8 @@
         "content/portals/smartrecruiters.js",
         "content/portals/breezy.js",
         "content/portals/jobvite.js",
+        "content/portals/personio.js",
+        "content/portals/recruitee.js",
         "content/sidebar.js",
         "content/content-main.js"
       ],

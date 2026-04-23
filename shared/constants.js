@@ -9,6 +9,8 @@ const PORTALS = {
   smartrecruiters: { hosts: ['jobs.smartrecruiters.com', 'careers.smartrecruiters.com', '.smartrecruiters.com'], name: 'SmartRecruiters' },
   breezy:          { hosts: ['.breezy.hr', 'app.breezy.hr'], name: 'Breezy HR' },
   jobvite:         { hosts: ['jobs.jobvite.com', '.jobvite.com'], name: 'Jobvite' },
+  personio:        { hosts: ['.jobs.personio.com', '.jobs.personio.de', '.personio.com', '.personio.de'], name: 'Personio' },
+  recruitee:       { hosts: ['.recruitee.com'], name: 'Recruitee' },
   generic:         { hosts: [], name: 'Job Site' },
 };
 
@@ -238,5 +240,7 @@ const SUCCESS_SIGNALS = {
   smartrecruiters: { urlPatterns: ['/thanks', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received'] },
   breezy:          { urlPatterns: ['/thanks', '/thank-you', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received your application'] },
   jobvite:         { urlPatterns: ['/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
+  personio:        { urlPatterns: ['/thank-you', '/thanks', '/success', '/confirmation'], titleKeywords: ['application submitted', 'thank you', 'bewerbung'] },
+  recruitee:       { urlPatterns: ['/thanks', '/thank-you', '/confirmation', '/success'], titleKeywords: ['application submitted', 'thank you', 'received your application'] },
   generic:         { urlPatterns: ['/thank-you', '/thanks', '/confirmation', '/submitted'], titleKeywords: ['application submitted', 'thank you', 'received'] },
 };

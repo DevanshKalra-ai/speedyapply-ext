@@ -134,6 +134,8 @@ async function triggerFill(portal, jobContext) {
       case 'smartrecruiters': results = await fillSmartRecruiters(profile); break;
       case 'breezy':          results = await fillBreezy(profile); break;
       case 'jobvite':         results = await fillJobvite(profile); break;
+      case 'personio':        results = await fillPersonio(profile); break;
+      case 'recruitee':       results = await fillRecruitee(profile); break;
       default:                results = await fillGeneric(profile); break;
     }
 
